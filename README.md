@@ -14,6 +14,10 @@ An automated ETL pipeline that fetches stock data from RapidAPI and loads it int
 
 All automated and scheduled using Apache Airflow!
 
+https://github.com/user-attachments/assets/8aa54282-0e80-4999-9bd5-c48d1c188bdd
+
+
+
 ## 🛠️ Tech Stack
 
 - **Apache Airflow** - Orchestrates the entire pipeline and handles scheduling
