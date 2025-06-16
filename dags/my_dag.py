@@ -46,13 +46,10 @@ def transform_stock_data():
 
 def load_stock_data():
     """Load transformed data into MySQL database"""
-    import pandas as pd
-    from sqlalchemy import create_engine
-    # MySQL connection config
-    connection_string = "mysql+mysqlconnector://root:pranav2123@localhost:3306/stock_data"
-    # Get transformed data
+    # Change localhost to host.docker.internal for Docker on Windows
+    connection_string = "mysql+mysqlconnector://root:pranav2123@host.docker.internal:3306/stock_data"
+    # Rest of your code stays the same
     data = transform_stock_data()
-    # Create DataFrame and load to MySQL
     df = pd.DataFrame(data)
     engine = create_engine(connection_string)
     df.to_sql(
@@ -64,7 +61,7 @@ def load_stock_data():
     print(f"Loaded {len(df)} records to MySQL")
     
 # Define the DAG
-with DAG("my_dag", start_date=datetime(2025, 1, 1), schedule_interval="@daily", catchup=False) as dag:
+with DAG("my_dag", start_date=datetime(2025, 6, 16), schedule_interval="@daily", catchup=False) as dag:
         # Define the tasks using PythonOperator
     extract_task = PythonOperator(
         task_id='extract_stock_data',
@@ -78,6 +75,7 @@ with DAG("my_dag", start_date=datetime(2025, 1, 1), schedule_interval="@daily", 
         task_id='load_stock_data',
         python_callable=load_stock_data
     )
+
     # Set task dependencies
     extract_task >> transform_task >> load_task
 
