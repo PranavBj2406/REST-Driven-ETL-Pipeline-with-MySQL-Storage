@@ -12,7 +12,7 @@ from sqlalchemy import create_engine
 def extract_stock_data():
     conn = http.client.HTTPSConnection("alpha-vantage.p.rapidapi.com")
     headers = {
-        'x-rapidapi-key': "f9a11114fbmsh1cd218885c221b4p133d14jsn6429510f088b",
+        'x-rapidapi-key':"rapid_api_key",
         'x-rapidapi-host': "alpha-vantage.p.rapidapi.com"
     }
     conn.request("GET", "/query?function=TIME_SERIES_DAILY&symbol=MSFT&outputsize=compact&datatype=json", headers=headers)
@@ -47,7 +47,7 @@ def transform_stock_data():
 def load_stock_data():
     """Load transformed data into MySQL database"""
     # Change localhost to host.docker.internal for Docker on Windows
-    connection_string = "mysql+mysqlconnector://root:pranav2123@host.docker.internal:3306/stock_data"
+    connection_string = "mysql+mysqlconnector://root:password@host.docker.internal:3306/stock_data"
     # Rest of your code stays the same
     data = transform_stock_data()
     df = pd.DataFrame(data)
