@@ -39,12 +39,12 @@ https://github.com/user-attachments/assets/8aa54282-0e80-4999-9bd5-c48d1c188bdd
 git clone <your-repo-url>
 cd stock-etl-pipeline
 ```
-
+install packages based on requirements.txt
+ 
 2. **Create environment file**
 Create a `.env` file with your credentials:
 ```env
 RAPIDAPI_KEY=your_api_key_here
-MYSQL_PASSWORD=your_mysql_password
 ```
 
 3. **Start the pipeline**
